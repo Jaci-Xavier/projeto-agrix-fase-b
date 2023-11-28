@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class Fertilizer {
 
   @ManyToMany(mappedBy = "fertilizers")
   @JsonIgnore
-  private List<Crop> crops = new ArrayList<>();
+  private List<Crop> crops;
 
   /**
    * Construtor vazio da classe Fertilizer.

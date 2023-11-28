@@ -1,7 +1,9 @@
 package com.betrybe.agrix.controllers;
 
 import com.betrybe.agrix.controllers.dto.CropDto;
+import com.betrybe.agrix.controllers.dto.FertilizerDto;
 import com.betrybe.agrix.model.entities.Crop;
+import com.betrybe.agrix.model.entities.Fertilizer;
 import com.betrybe.agrix.service.CropService;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,6 +82,33 @@ public class CropController {
     )).collect(Collectors.toList());
 
     return new ResponseEntity<>(cropsDto, HttpStatus.OK);
+  }
+
+  /**
+   * Crop and fertilizer associate.
+   */
+
+  @PostMapping("/{cropId}/fertilizers/{fertilizerId}")
+  public ResponseEntity<String> associateFertilizer(@PathVariable Long cropId,
+      @PathVariable Long fertilizerId) {
+    String message = cropService.associateFertilizer(cropId, fertilizerId);
+
+    return new ResponseEntity<>(message, HttpStatus.CREATED);
+  }
+
+  /**
+   * Get fertilizer by cropId.
+   */
+
+  @GetMapping("/{cropId}/fertilizers")
+  public ResponseEntity<List<FertilizerDto>> getFertilizerByCropId(@PathVariable Long cropId) {
+    List<Fertilizer> fertilizersDto = cropService.getAllFertilizerByCropId(cropId);
+
+    List<FertilizerDto> fertilizers = fertilizersDto.stream().map(fertilizer -> new FertilizerDto(
+        fertilizer.getId(), fertilizer.getName(), fertilizer.getBrand(), fertilizer.getComposition()
+    )).toList();
+
+    return new ResponseEntity<>(fertilizers, HttpStatus.OK);
   }
 
 }

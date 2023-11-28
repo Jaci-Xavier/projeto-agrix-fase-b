@@ -1,6 +1,5 @@
 package com.betrybe.agrix.controllers;
 
-import com.betrybe.agrix.controllers.dto.FarmDto;
 import com.betrybe.agrix.controllers.dto.FertilizerDto;
 import com.betrybe.agrix.model.entities.Fertilizer;
 import com.betrybe.agrix.service.FertilizerService;

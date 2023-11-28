@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +42,7 @@ public class Crop {
       inverseJoinColumns = @JoinColumn(name = "fertilizer_id")
   )
 
-  private List<Fertilizer> fertilizers = new ArrayList<>();
+  private List<Fertilizer> fertilizers;
 
   /**
    * Construtor da classe Crops.
