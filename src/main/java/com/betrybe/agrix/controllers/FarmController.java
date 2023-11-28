@@ -85,7 +85,9 @@ public class FarmController {
 
     Crop crop = farmService.createCrop(farmId, cropDto.convertToCrop());
 
-    CropDto newCropDto = new CropDto(crop.getId(), crop.getName(), crop.getPlantedArea(), farmId);
+    CropDto newCropDto = new CropDto(crop.getId(), crop.getName(), crop.getPlantedArea(),
+        crop.getPlantedDate(), crop.getHarvestDate(), farmId
+    );
 
     return new ResponseEntity<>(newCropDto, HttpStatus.CREATED);
   }
@@ -99,7 +101,8 @@ public class FarmController {
     List<Crop> crops = farmService.getCropsByFarmId(farmId);
 
     List<CropDto> cropsDto = crops.stream().map(crop -> new CropDto(
-        crop.getId(), crop.getName(), crop.getPlantedArea(), farmId
+        crop.getId(), crop.getName(), crop.getPlantedArea(), crop.getPlantedDate(),
+          crop.getHarvestDate(), farmId
     )).toList();
 
     return new ResponseEntity<>(cropsDto, HttpStatus.OK);
