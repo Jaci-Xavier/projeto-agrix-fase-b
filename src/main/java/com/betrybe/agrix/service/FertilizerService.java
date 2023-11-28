@@ -27,4 +27,12 @@ public class FertilizerService {
   public Fertilizer createFertilizer(Fertilizer fertilizer) {
     return fertilizerRepository.save(fertilizer);
   }
+
+  /**
+   * Get all fertilizers.
+   */
+
+  public Iterable<Fertilizer> getAllFertilizers() {
+    return fertilizerRepository.findAll();
+  }
 }
